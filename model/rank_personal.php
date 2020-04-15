@@ -33,15 +33,15 @@ $sync_function_name = "sync_complete()";
     //$sql =
     //$score_yesterday = R::getRow('SELECT uuid, rate_learn_flashcard, rate_take_note, rate_test_select, hard_learn_flashcard, hard_take_note, hard_test_select, score FROM score_signal WHERE rate_learn_flashcard=? AND rate_take_note=? AND rate_test_select=? AND hard_learn_flashcard=? AND hard_take_note=? AND hard_test_select=? AND score=? AND uuid !=?', [$rate_learn_flashcard, $rate_take_note, $rate_test_select, $hard_learn_flashcard, $hard_take_note, $hard_test_select, $score, $uuid]);
     //$score_yesterday = R::getRow('SELECT uuid, rate_learn_flashcard FROM score_signal WHERE rate_learn_flashcard=? AND uuid !=?', [$rate_learn_flashcard, $uuid]);
-    $rank = R::getAll("SELECT * FROM score_signal_login WHERE uuid = '".$uuid."'");
+    $selfrank = R::getAll("SELECT * FROM score_signal_login WHERE uuid = '".$uuid."'");
     //$rank = R::getAll('SELECT * FROM score_signal_login');
     //$allrank = R::getAll('SELECT * FROM score_signal_login');
 
 
-    if (is_null($rank)) {
-        $rank = array();
+    if (is_null($selfrank)) {
+        $selfrank = array();
 }
 
 
-    jsonp_callback($rank);
+    jsonp_callback($selfrank);
 //}
