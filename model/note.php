@@ -1,12 +1,12 @@
 <?php
 /**
  * 用來支援同步的功能
- * 
+ *
  * 傳送參數
  * [$_GET]
  * uuid: FingerPint
  * timestamp: Device Timestamp
- * 
+ *
  * [$_POST]
  * logs
  */
@@ -21,14 +21,14 @@ $sync_function_name = "sync_complete()";
 if (isset($_GET) && count($_GET) > 0 && isset($_GET["q"]) && isset($_GET["uuid"])) {
     $uuid = $_GET["uuid"];
     $q = $_GET["q"];
-    
-    //$sql = 
-    $notes = R::getRow('SELECT uuid, name, note FROM note WHERE q=? AND uuid !=?', [$q, $uuid]);
-    
+
+    //$sql =
+    $notes = R::getAll('SELECT uuid, name, note FROM note WHERE q=? AND uuid !=?', [$q, $uuid]);
+
     if (is_null($notes)) {
         $notes = array();
     }
-    
+
 //    $notes = array(
 //        array(
 //            "uuid"=> 1,
@@ -46,6 +46,6 @@ if (isset($_GET) && count($_GET) > 0 && isset($_GET["q"]) && isset($_GET["uuid"]
 //            "note"=> "心得C\n\n\n\n\n\n心得心得"
 //        )
 //    );
-    
+
     jsonp_callback($notes);
 }
