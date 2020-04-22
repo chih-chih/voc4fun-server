@@ -20,13 +20,13 @@ $sync_function_name = "sync_complete()";
 
 //if (isset($_GET) && count($_GET) > 0 && isset($_GET["q"]) && isset($_GET["uuid"])) {
     $uuid = $_GET["uuid"];
-    //$q = $_GET["q"];
+    $q = $_GET["q"];
 
     //$sql =
-    $notes = R::getAll('SELECT * FROM note');
+    $selfnotes = R::getAll("SELECT * FROM note WHERE q='".$q."' AND uuid ='".$uuid."'");
 
-    if (is_null($notes)) {
-        $notes = array();
+    if (is_null($selfnotes)) {
+        $selfnotes = array();
     }
 
 //    $notes = array(
@@ -47,5 +47,5 @@ $sync_function_name = "sync_complete()";
 //        )
 //    );
 
-    jsonp_callback($notes);
+    jsonp_callback($selfnotes);
 //}
